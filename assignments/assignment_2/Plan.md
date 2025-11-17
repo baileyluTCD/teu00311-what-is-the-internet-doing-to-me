@@ -1,0 +1,41 @@
+-  Intro: summarise all below like a paper abstract
+	- Describe Blackboard 
+	- Describe how Blackboard is used
+	- Mention that while opt in, feasibly there is no choice offered to students as no alternative
+-  Text describing the general vulnerability: device tracking as a risk to device-owner
+	- Blackboard [tracks](https://www.anthology.com/trust-center/privacy-statement#introduction):
+		- Marketing info - what you may be interested in based on modules
+		- Personalization - typically linked to a microsoft account, has it's own issues
+		- All submissions - specifically highlight images and videos 
+		- Grades, Quizzes, Timetables
+		- Video calls
+	- Mentioned that shared directly are:
+		- Amazon
+		- Microsoft
+		- Google
+		- Hubspot
+		- LinkedIn
+-  Text describing EXIF, GPS, how your camera/OS uses that (or used to, if that’s the case)
+	- Ways they achieve this:
+		- JavaScript packets going to places like `cookielaw.org` or `newrelic.com`
+-  Text describing the potential for tracking: uploaded images giving a location history
+	- Realistically blackboard can know a vast majority of what there is to know about students
+	- Timetables - exact and regular predicted location
+	- Images/Videos - what the student looks like
+	- Grades - can predict what jobs students may get
+-  Text saying what you will/won’t do about it?
+	- Use a browser i.e. librewolf, harded firefox, etc
+	- This is the college's responsibility to fix
+	- Blackboard is generally a poor user experience anyway:
+		- Extreme loading times large bundle
+		- Lack of care for web standards means pages are usually not associated with a url but internal state
+		- Poor, unintuitive ui
+		- Likely costing the college a small fortune
+		- Relatively easy concept to develop in house or find an open source alternative for
+- Location-services:-) Or maybe argue that image locations aren’t a big deal except in unrealistic movie-plot
+	- We have to just trust that Blackboard are good people
+- Scenarios
+-  References – if reference is to peer-reviewed paper, good; if reference is URL then include accessed-at date”
+	- [Blackboard privacy statement](https://www.anthology.com/trust-center/privacy-statement#introduction) accessed 29th October 2025
+-  Appendices: screen shots of device/camera-app privacy settings, table showing how many pics
+you took over a few days and when, ...
