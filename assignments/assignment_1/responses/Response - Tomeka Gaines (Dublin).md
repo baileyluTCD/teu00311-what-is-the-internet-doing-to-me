@@ -43,4 +43,4 @@ The resume shows a strong work ethic and adaptability, but the short tenure at t
 7. *Team Dynamics*: “Give an example of a conflict within a cross‑functional team and how you resolved it.”  
 
 ## Resume Factor
-**8 / 10** – strong technical achievements and measurable results, with minor concerns around tenure length and cloud/DevOps exposure.
+**8 / 10** – Strong technical achievements and measurable results, with minor concerns around tenure length and cloud/DevOps exposure.

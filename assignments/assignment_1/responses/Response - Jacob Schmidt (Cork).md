@@ -9,12 +9,13 @@ Jacob shows rapid growth, moving from an entry‑level role to a full‑responsi
 - Worked in **cross‑functional teams**, suggesting good collaboration skills.
 
 **Strong Points**  
-| Area | Evidence |
-|------|----------|
-| **Impact‑driven development** | User base ↑ 30 %, API latency ↓ 20 % |
-| **Code quality** | Unit testing → bug reports ↓ 25 % |
-| **Scalability** | Data‑processing scripts that streamline workflows |
-| **Adaptability** | Migration from legacy to Django with zero downtime |
+
+| Area                          | Evidence                                           |
+| ----------------------------- | -------------------------------------------------- |
+| **Impact‑driven development** | User base ↑ 30 %, API latency ↓ 20 %               |
+| **Code quality**              | Unit testing → bug reports ↓ 25 %                  |
+| **Scalability**               | Data‑processing scripts that streamline workflows  |
+| **Adaptability**              | Migration from legacy to Django with zero downtime |
 
 **Weaknesses / Gaps**  
 - No explicit mention of **cloud platforms** (AWS, GCP, Azure) or **containerization** (Docker, Kubernetes).  

@@ -59,6 +59,6 @@
    - Which emerging Python technologies or practices are you most interested in learning, and why?
    - How do you stay current with best practices in performance optimization and security?
 
-## Resume Factor (1‑10)
+## Resume Factor
 
 **8.2** – Strong technical foundation and measurable impact, with room for growth in cloud/DevOps and leadership experience.

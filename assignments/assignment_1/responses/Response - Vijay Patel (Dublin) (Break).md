@@ -45,4 +45,4 @@
 7. *DevOps exposure*: “What experience do you have with containerization (Docker) or cloud platforms (AWS, GCP, Azure)?”  
 
 ## Resume Factor  
-**7.5 / 10** – solid technical foundation and measurable impact, but limited tenure and missing cloud/DevOps experience keep the score from reaching the top tier.
+**7.5 / 10** – Solid technical foundation and measurable impact, but limited tenure and missing cloud/DevOps experience keep the score from reaching the top tier.
