@@ -3,13 +3,17 @@ Blackboard[^1] is learning management system that needs no introduction to any T
 Starting from 2014[^2] Trinity has had ever growing usage of _Blackboard Learn_[^3], the digital platform for learning sold as a service by it's parent company, Anthology. This has culminated in Blackboard becoming a non optional part of student life as it is required for many day to day tasks. In that time, it has gained ever more access to data about students and their lives to a scale many may not realise, which is especially egregious considering there is no feasible way to avoid much of it.
 
 # What does Blackboard track?
+Blackboard track a vast amount of data from it's users[^5], including:
+- **Marketing Information**: _Blackboard_ are able to figure out what students may be interested in and share that data with advertising vendors like _Google AdWords_ or _Facebook_[^5], which is extrapolated from things like a student's module and subject choices or maybe things they have mentioned in submissions which divulge personal data or interests.
+- **Personalization Data**: _Blackboard_ allow logging in with multiple OpenID Connect (OIDC) providers, which is a standard protocol for determining who a user is based on an external service they have already logged into. Directly, this includes providers such as _Microsoft_, which are then able to explicitly link any user data _Blackboard_ may share with them to the logged in user.
+- **Student Submissions**: _Blackboard_ retains the right to store and potentially share any student submissions[^5], such as "responses to quizzes", "files you submit" or "audio" or "video recordings", which may be surprising to many that these submissions can live as long as they do, being directly used for "Analytics and Recommendations", and shared to like _Amazon Web Services_ or _Google Analytics_[^5].
 
 Additionally, the data from the Blackboard Student Timetable[^6] can trivially be used to predict the location of a student at any given moment during a school term, which presents an obvious and major security risk.
 
 # How does Blackboard acquire data?
 Blackboard acquires data in a number of different ways depending on how users interact with the platform. First and foremost, the learning management system makes frequent use of various cookie embeddings to track things from login sessions to general identification of who the user is. For the purpose of demonstration, the following were sourced from inspecting the network requests of our very own class page [^7]. For this experiment it should be noted I am using Librewolf[^8] with uBlock Origin[^12] on NixOS[^9], and your results may vary depending on device, browser and a number of other factors.
 
-In total, a single force refresh (`CONTROL` + `f5`) on most browsers for me caused a download of a grand total of **51** different JavaScript blobs, which is quite high. These can be broken down into a number of sections, including:
+In total, a single force refjresh (`CONTROL` + `f5`) on most browsers for me caused a download of a grand total of **51** different JavaScript blobs, which is quite high. These can be broken down into a number of sections, including:
 - Scripts required to run the blackboard single page application (the majority of the bundle), most of which have been minified with `webpack`[^10] for both code obfuscation and reduced network usage, making them hard to inspect.
 - `cookie.js`[^11], the cookie implementation for Blackboard. From this we learn that if we inspect the value of `document.cookie`, we can see some of the cookie values that blackboard stores directly. In my case these were:
 
@@ -30,17 +34,20 @@ While in a lot of cases, there is not much you can do about this tracking short 
 
 For example, your browser setup is crucial to blocking a lot of the tracking. Things like a hardened Firefox setup[^17] or Librewolf[^8] will block the vast majority of these tracking methods by default, making them good choices for any privacy minded individuals. These typically include options like:
 - Automatic clearing of cookies on session exit[^18]
-- Spoofed hardware details (i.e. Librewolf on some Linux distribution appears as google chrome on windows, which is by far the most common)[^19]
+- Spoofed hardware details (i.e. Librewolf on some Linux distribution appears as firefox on windows, which is by far more common)[^19]
 - Installation of an ad-blocker such as uBlock Origin[^12]
+- Another good option may be the use of a tool like Adnauseum[^26], which goes one step further than an ad-blocker and implements more active obfuscation of your data by _actively clicking on advertisements_. However, because of the sheer quantity/throughput it can handle, this has an inverse effect to what advertisers are looking for, as if you appear "interested" in every single advertisement it becomes impossible to narrow down what they should actually show you to effectively advertise to you. In some cases, this may even actively waste advertisers money as, with enough people doing this, the turnover rate of advertising budget to product sold drops exponentially.
 
+There are also a number of lesser settings on _Blackboard_ itself you may configure for enhanced privacy:
+- Use the most minimal "x" can view my profile on the [^24] _Blackboard_ profile page
+- Disable any extra applications you have granted authorisation tokens under the [^25] tools page, which manages _Blackboard_'s own OpenID Connect authentication scopes.
 # Why take these steps to protect yourself
 I am certain that the vast majority of students would feel at the very least, uncomfortable with what _Blackboard_ are able to to with their data, or the fact that it remains in their possession for as long as it does. Aside from the obvious and previously discussed ethical ramifications, this also poses a serious security risk in the event of any form of data breach on _Blackboard_'s behalf. For example, if the timetable data of some students were to be released, they could have their precise, predictable location leaked, which I believe many would be uncomfortable with someone acting in bad faith having access to.
 
-Engagement and academic performance data can also evidently be used to predict a given student's future results and may be used to inform employment platforms, such as LinkedIn, about how good of a worker a student may make, which may unfairly reflect their character in an inaccurate way.
-
+Engagement and academic performance data can also evidently be used to predict a given student's future results and may be used to inform employment platforms, such as LinkedIn, about how good of a worker a student may make, which may unfairly reflect their character in an inaccurate way. Personally, I find the potential for academic profiling making it's way to third parties the worst out of _Blackboard_'s data harvesting policies.
 # Conclusion
 In conclusion, it should be clear by now that the tracking done by _Blackboard_ is incredibly invasive and extensive - and especially so considering that there is no feasible way to opt out of using it for a lot of people. As students, we have no choice but to trust that Blackboard are good people and don't expose our data to anyone malicious, however that becomes incredibly difficult when taking in to account even just the advertising providers that they do mention [^5]. It is nigh impossible to know what might be happening with our data behind the scenes, which presents a serious privacy risk as more and more of our college services are digitised.
-
+jj
 As a potential solution, I would like to implore Trinity to re-think it's use of _Blackboard_ as it's primary learning management system in the first place. On top of all the privacy issues raised above, the sheer size of the bundle sent for the web app, along with the generally subpar user experience and implementation of web standards, creates impossible to ignore red flags as someone who is into tech. While I can't find any official figures for how much Trinity spends on _Blackboard_ in a given year, one can only imagine it is a significant amount, and seeing as _Blackboard_ itself really is not that complex of a concept, I would recommend switching to some form of open source, self hosted alternative to ensure privacy and an excellent user experience for the users.
 
 [^1]: https://www.anthology.com/ - Accessed 29th Oct 2025
@@ -54,113 +61,25 @@ As a potential solution, I would like to implore Trinity to re-think it's use of
 
 [^5]: https://www.anthology.com/trust-center/privacy-statement - Accessed October 29th 2025
 
-[^6]: https://www.tcd.ie/itservices/vle/#accordion2170885 - Accessed 29th October
+[^6]: https://www.tcd.ie/itservices/vle/#accordion2170885 - Accessed 29th October 2025
 
-[^7]: _What is the internet doing to me?_ Blackboard Page Network Requests filtered to JavaScript files - Accessed 5th November ![[Class Page Network Requests.png]]
+[^7]: _What is the internet doing to me?_ Blackboard Page Network Requests filtered to JavaScript files - Accessed 5th November 2025 ![[Class Page Network Requests.png]]
 
-[^8]: https://librewolf.net/ - Accessed 5th November
+[^8]: https://librewolf.net/ - Accessed 5th November 2025
 
-[^9]: https://nixos.org/ - Accessed 5th November
+[^9]: https://nixos.org/ - Accessed 5th November 2025
 
-[^10]: https://webpack.js.org/ - Accessed 5th November
+[^10]: https://webpack.js.org/ - Accessed 5th November 2025
 
-[^11]: `cookie.js` file, which handle's blackboard's cookie implementation - Accessed 5th November
-```javascript
-/**
- * Sets a Cookie with the given name and value.
- *
- * name       Name of the cookie
- * value      Value of the cookie
- * [expires]  Expiration date of the cookie (default: end of current session)
- * [path]     Path where the cookie is valid (default: path of calling document)
- * [domain]   Domain where the cookie is valid
- *              (default: domain of calling document)
- * [secure]   Boolean value indicating if the cookie transmission requires a
- *              secure transmission
- */
-function setCookie(name, value, expires, path, domain, secure)
-{
-    document.cookie=name + "=" + escape(value) +
-        ((expires) ? "; expires=" + expires.toGMTString() : "") +
-        ((path) ? "; path=" + path : "; path=/") +
-        ((domain) ? "; domain=" + domain : "") +
-        ((secure) ? "; secure" : "");
-}
+[^11]: `cookie.js` file, which handle's blackboard's cookie implementation - Accessed 5th November 2025 ![[cookie.js]]
 
-function setRootCookie(name, value, expires, path, domain, secure)
-{
-    document.cookie= name + "=" + escape(value) +
-        ((expires) ? "; expires=" + expires.toGMTString() : "") +
-        "; path=/" +
-        ((domain) ? "; domain=" + domain : "") +
-        ((secure) ? "; secure" : "");
-}
+[^12]: https://ublockorigin.com/ - Accessed 5th November 2025
 
-/**
- * Gets the value of the specified cookie.
- *
- * name  Name of the desired cookie.
- *
- * Returns a string containing value of specified cookie,
- *   or null if cookie does not exist.
- */
-function getCookie(name)
-{
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
-    if (begin == -1)
-    {
-        begin = dc.indexOf(prefix);
-        if (begin !== 0)
-        {
-          return null;
-        }
-    }
-    else
-    {
-        begin += 2;
-    }
-    var end = document.cookie.indexOf(";", begin);
-    if (end == -1)
-    {
-        end = dc.length;
-    }
-    return unescape(dc.substring(begin + prefix.length, end));
-}
+[^13]: Pendo.js - from [https://pendo.io](https://pendo.io) - Accessed 5th November 2025 ![[pendo.js src.png]]
 
-/**
- * Deletes the specified cookie. Will only perform the deletion if
- *
- *   a) The cookie exists in the current path; or
- *   b) The alwaysDelete flag is specified
- *
- * name           name of the cookie
- * [path]         path of the cookie (must be same as path used to create cookie)
- * [domain]       domain of the cookie (must be same as domain used to create cookie)
- * [alwaysDelete] if true, delete the cookie whether it exists in the current path, or not
- */
-function deleteCookie(name, path, domain, alwaysDelete)
-{
-    if (getCookie(name) || alwaysDelete)
-    {
-        document.cookie = name + "=" +
-            ((path) ? "; path=" + path : "") +
-            ((domain) ? "; domain=" + domain : "") +
-            "; expires=" + new Date(1).toGMTString();
-    }
-}
-```
+[^14]: [https://www.pendo.io/about/](https://www.pendo.io/about/) - Accessed 5th November 2025
 
-[^12]: https://ublockorigin.com/ - Accessed 5th November
-
-[^13]: Pendo.js - from [https://pendo.io](https://pendo.io) - Accessed 5th November
-![[pendo.js src.png]]
-
-[^14]: [https://www.pendo.io/about/](https://www.pendo.io/about/) - Accessed 5th November
-
-[^15]: `js-agent.newrelic.com` - Accessed 5th November 2025
-	![[Newrelic request.png]]
+[^15]: `js-agent.newrelic.com` - Accessed 5th November 2025 ![[Newrelic request.png]]
 
 [^16]: [https://newrelic.com/](https://newrelic.com/) - Accessed November 5th 2025
 
@@ -170,10 +89,16 @@ function deleteCookie(name, path, domain, alwaysDelete)
 
 [^19]: https://seon.io/resources/3-examples-of-browser-spoofing-and-how-to-detect-them/ - Accessed 5th November 2025
 
-[^20]: https://support.pendo.io/hc/en-us/articles/360031862272-Install-Pendo-on-a-single-page-web-application
+[^20]: https://support.pendo.io/hc/en-us/articles/360031862272-Install-Pendo-on-a-single-page-web-application - Accessed 17th November 2025
 
-[^21]: https://support.pendo.io/hc/en-us/articles/360032294291-Configure-Track-Events
+[^21]: https://support.pendo.io/hc/en-us/articles/360032294291-Configure-Track-Events - Accessed 17th November 2025
 
-[^22]: https://docs.newrelic.com/docs/browser/browser-monitoring/installation/install-browser-monitoring-agent/
+[^22]: https://docs.newrelic.com/docs/browser/browser-monitoring/installation/install-browser-monitoring-agent/ - Accessed 17th November 2025
 
-[^23]: https://docs.newrelic.com/docs/browser/browser-monitoring/browser-pro-features/session-replay/get-started/
+[^23]: https://docs.newrelic.com/docs/browser/browser-monitoring/browser-pro-features/session-replay/get-started/ - Accessed 17th November 2025
+
+[^24]: https://tcd.blackboard.com/ultra/profile - Accessed 17th November 2025
+
+[^25]: https://tcd.blackboard.com/ultra/tools - Accessed 17th November 2025
+
+[^26]: https://adnauseam.io/
